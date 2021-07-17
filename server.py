@@ -8,12 +8,18 @@ app.secret_key = 'plxwork'
 def counter():
     if 'count' not in session:
         session['count'] = 0
-    session['count'] += 1
+    else:
+        session['count'] += 1
     return render_template('index.html')
+
+@app.route('/plus_two', methods=['POST', 'GET'])
+def plus_two():
+        session['count'] += 1
+        return redirect('/')
 
 @app.route('/destroy_session')
 def destroy():
-    session.pop('count')
+    session.clear()
     return redirect('/')
 
 
